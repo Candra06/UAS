@@ -33,7 +33,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <a href="<?= BASEURL .'/pengeluaran/index.php' ?>" class="nav-link">
               <i class="nav-icon fas fa-upload"></i>
               <p>Riwayat Pengeluaran</p>
             </a>
