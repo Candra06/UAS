@@ -134,12 +134,20 @@ include '../layout/head.php';
             // if ($q) {
               try {
                 $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
-                echo $q;
-                move_uploaded_file($tempname, $folder);
-                // echo " <script>
+                echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
+                if (move_uploaded_file($tempname, $folder)) {
+                  // echo " <script>
                 //       alert('Berhasil menambah data !');
                 //       window.location = 'http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas_172410103012';
                 //       </script>";
+                } else {
+                  echo " <script>
+                      alert('Gagal menambah data !');
+                      </script>";
+                }
+                
+                ;
+                
 
                 exit();
               } catch (\Throwable $th) {
