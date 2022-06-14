@@ -142,8 +142,6 @@ include '../layout/head.php';
                       alert('Gagal menambah data !');
                       </script>";
                 }             
-
-                exit();
               } catch (\Throwable $th) {
                 echo $th;
               }
