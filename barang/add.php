@@ -129,10 +129,11 @@ include '../layout/head.php';
             $tempname = $_FILES["foto"]["tmp_name"];
             $folder = "../foto/" . $filename;
 
-            $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+            
 
-            if ($q) {
+            // if ($q) {
               try {
+                $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
                 move_uploaded_file($tempname, $folder);
                 echo " <script>
                       alert('Berhasil menambah data !');
@@ -151,9 +152,9 @@ include '../layout/head.php';
               // } else {
               //   echo "Gagal mengunggah foto";
               // }
-            } else {
-              echo "Gagal menambah data";
-            }
+            // } else {
+            //   echo "Gagal menambah data";
+            // }
           }
           ?>
         </div>
