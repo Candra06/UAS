@@ -128,23 +128,24 @@ include '../layout/head.php';
             $filename = getName() . '.' . $ext;
             $tempname = $_FILES["foto"]["tmp_name"];
             // $folder = "../foto/" . $filename;
-            
-              try {
-                $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
-                // echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
-                if (move_uploaded_file($tempname, $folder)) {
-                  echo " <script>
+
+            try {
+              $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+              // echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
+              if (move_uploaded_file($tempname, $folder)) {
+                echo " <script>
                       alert('Berhasil menambah data !');
                       window.location = 'http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas_172410103012';
                       </script>";
-                } else {
-                  echo " <script>
-                      alert('Gagal menambah data !');
-                      </script>";
-                }             
-              } catch (Exception $e) {
-                $e->getMessage();
+              } else {
+                echo "Not uploaded because of error #".$_FILES["foto"]["error"];
+                // echo " <script>
+                //       alert('Gagal menambah data !');
+                //       </script>";
               }
+            } catch (Exception $e) {
+              $e->getMessage();
+            }
           }
           ?>
         </div>
