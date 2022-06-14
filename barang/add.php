@@ -136,7 +136,7 @@ include '../layout/head.php';
                 move_uploaded_file($tempname, $folder);
                 echo " <script>
                       alert('Berhasil menambah data !');
-                      window.location = 'http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/';
+                      window.location = 'http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas_172410103012';
                       </script>";
                 $url = BASEURL;
                 header("Location:$url");
