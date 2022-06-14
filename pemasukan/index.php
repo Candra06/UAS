@@ -57,19 +57,23 @@ include '../layout/head.php';
                                     <h3 class="card-title">Data Pemasukan</h3>
 
                                     <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 200px;">
-                                            <select class="form-control" required id="sort_by" name="sort_by">
-                                                <option value="">Urutkan Berdasar</option>
+                                        <!-- <form action="" class="form-inline"> -->
+                                            <div class="input-group input-group-sm mr-2" style="width: 200px;">
+                                                <select class="form-control" required id="sort_by" name="sort_by">
+                                                    <option value="">Urutkan Berdasar</option>
 
-                                                <option value="name_asc">Nama(A-Z)</option>
-                                                <option value="name_desc">Nama(Z-A)</option>
-                                                <option value="created_asc">Tanggal Masuk(Terlama)</option>
-                                                <option value="created_desc">Tanggal Masuk(Terbaru)</option>
+                                                    <option value="name_asc">Nama(A-Z)</option>
+                                                    <option value="name_desc">Nama(Z-A)</option>
+                                                    <option value="created_asc">Tanggal Masuk(Terlama)</option>
+                                                    <option value="created_desc">Tanggal Masuk(Terbaru)</option>
 
-                                            </select>
-                                            <!-- <input type="text" id="search" name="table_search" class="form-control float-right" placeholder="Cari nama barang"> -->
+                                                </select>
+                                                <!-- <input type="text" id="search" name="table_search" class="form-control float-right" placeholder="Cari nama barang"> -->
 
-                                        </div>
+                                            </div>
+                                            <!-- <button type="submit" class="btn btn-sm btn-primary ">Urutkan</button> -->
+                                        <!-- </form> -->
+
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
@@ -84,7 +88,8 @@ include '../layout/head.php';
                                             </tr>
                                         </thead>
                                         <tbody id="data-pemasukan">
-
+                                        <!-- <tbody> -->
+                                            
 
                                         </tbody>
                                     </table>
@@ -141,7 +146,7 @@ include '../layout/head.php';
                                                 if ($barang->num_rows > 0) {
                                                     while ($row = $barang->fetch_assoc()) {
                                                 ?>
-                                                        <option value="<?= $row['id']?>"><?= $row['nama_barang']?></option>
+                                                        <option value="<?= $row['id'] ?>"><?= $row['nama_barang'] ?></option>
                                                 <?php
                                                     }
                                                 }

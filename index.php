@@ -175,8 +175,74 @@ include 'layout/head.php';
           <!-- /.modal-dialog -->
         </div>
 
+        <!-- modal detail -->
+        <div class="modal fade" id="modal-detail">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Detail Data</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Nama Barang</label>
+                      <h6 id="nama_detail"></h6>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Stok</label>
+                      <h6 id="stok_detail"></h6>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Status</label>
+                      <h6 id="status_detail"></h6>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="exampleInputFile">Foto</label>
+
+                      <img src="" id="foto" alt="" srcset="">
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <div></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
         <script>
           $(document).ready(function() {
+            $('img').on('click', function() {
+              var imageSource = $(this).attr('src')
+              console.log(imageSource);
+            });
+          
+            $('.getSrc').click(function() {
+              console.log("hello");
+              var src = $(this).attr('src');
+
+              $('#foto').attr('src', src);
+            });
 
             $(function() {
               $('#modal-update').on('show.bs.modal', function(event) {
@@ -190,9 +256,26 @@ include 'layout/head.php';
                 modal.find('#nama_barang').val(nama_barang);
                 modal.find('#stok').val(stok);
                 modal.find('#status').val(status);
-                // modal.find('#id_modal').val(id);
               });
             });
+            // $(function() {
+            //   $('#modal-detail').on('show.bs.modal', function(event) {
+            //     var text = $(event.relatedTarget);
+            //     var foto = $(this).attr("src").data('foto');
+            //     var nama_detail = text.data('nama');
+            //     var stok_detail = text.data('stok');
+            //     var status_detail = text.data('status');
+            //     var modalDetail = $(this);
+            //     console.log(foto);
+            //     console.log(nama_detail);
+            //     console.log(text.data('stok'));
+            //     modalDetail.find('#foto').html(foto);
+            //     modalDetail.find('#nama_detail').html(nama_detail);
+            //     modalDetail.find('#stok_detail').html(stok_detail);
+            //     modalDetail.find('#status_detail').html(status_detail);
+            //     // modal.find('#id_modal').val(id);
+            //   });
+            // });
             $(document).on("click", "#update-data", function() {
               var data = new FormData();
               data.append("nama_barang", $('#nama_barang').val());
@@ -208,19 +291,9 @@ include 'layout/head.php';
                 processData: false,
                 contentType: false,
                 data: data,
-                // data: {
-                //   id: $('#id').val(),
-                //   nama_barang: $('#nama_barang').val(),
-                //   stok: $('#stok').val(),
-                //   status: $('#status').val(),
-                //   foto: foto,
-                // },
                 success: function(dataResult) {
                   console.log(dataResult);
                   var hasil = JSON.parse(dataResult);
-                  // var dataResult = JSON.stringify(dataResult, ["statusCode"]);
-                  // var result = JSON.parse(dataResult);
-                  // console.log(hasil.statusCode);
                   if (hasil.statusCode == 200) {
                     $('#modal-update').modal().hide();
                     alert('Berhasil mengubah data !');

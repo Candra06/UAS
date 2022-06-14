@@ -24,7 +24,7 @@ if (isset($_GET['sort_by'])) {
 }else{
     $query = "SELECT pemasukan.*, barang.nama_barang FROM pemasukan JOIN barang ON pemasukan.barang_id=barang.id ORDER BY pemasukan.id DESC LIMIT $start_from, $limit";
 }
-echo $query;
+
 $result = mysqli_query($con, $query);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
 } else {
     ?>
     <tr>
-        <td colspan="5" class="float-center">Data tidak ditemukan</td>
+        <td colspan="5" class="text-center">Data tidak ditemukan</td>
     </tr>
 <?php
 }

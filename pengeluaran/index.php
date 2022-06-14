@@ -57,19 +57,28 @@ include '../layout/head.php';
                                     <h3 class="card-title">Data Pengeluaran</h3>
 
                                     <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 200px;">
-                                            <select class="form-control" required id="sort_by" name="sort_by">
-                                                <option value="">Urutkan Berdasar</option>
+                                        <form class="form-inline" action="" method="get">
+                                            <div class="input-group input-group-sm mr-2" style="width: 150px;">
 
-                                                <option value="name_asc">Nama(A-Z)</option>
-                                                <option value="name_desc">Nama(Z-A)</option>
-                                                <option value="created_asc">Tanggal Keluar(Terlama)</option>
-                                                <option value="created_desc">Tanggal Keluar(Terbaru)</option>
+                                                <input type="text" id="search" name="search" class="form-control float-right" placeholder="Cari nama barang">
 
-                                            </select>
-                                            <!-- <input type="text" id="search" name="table_search" class="form-control float-right" placeholder="Cari nama barang"> -->
+                                            </div>
+                                            <div class="input-group input-group-sm mr-2" style="width: 200px;">
+                                                <select class="form-control" id="sort_by" name="sort_by">
+                                                    <option value="">Urutkan Berdasar</option>
 
-                                        </div>
+                                                    <option value="name_asc">Nama(A-Z)</option>
+                                                    <option value="name_desc">Nama(Z-A)</option>
+                                                    <option value="created_asc">Tanggal Keluar(Terlama)</option>
+                                                    <option value="created_desc">Tanggal Keluar(Terbaru)</option>
+
+                                                </select>
+                                                <!-- <input type="text" id="search" name="table_search" class="form-control float-right" placeholder="Cari nama barang"> -->
+
+                                            </div>
+                                            <button type="submit" class="btn btn-sm btn-primary ">Filter</button>
+                                        </form>
+
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
@@ -83,35 +92,58 @@ include '../layout/head.php';
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="data-pengeluaran">
+                                        <!-- <tbody id="data-pengeluaran"> -->
+                                        <tbody>
+                                            <?php
+                                            $query = "SELECT pengeluaran.*, barang.nama_barang FROM pengeluaran JOIN barang ON pengeluaran.barang_id=barang.id";
+                                            if (isset($_GET['search']) && $_GET['search'] != '') {
+                                                $query = $query . " WHERE barang.nama_barang LIKE '" . "%" . $_GET['search'] . "%" . "'";
+                                            }else {
+                                                $query = $query;
+                                            }
+                                            if (isset($_GET['sort_by'])) {
+                                                if ($_GET['sort_by'] == ''){
+                                                    $query = $query;
+                                                } else if ($_GET['sort_by'] == 'name_asc') {
+                                                    $query = $query . " ORDER BY barang.nama_barang ASC";
+                                                } elseif ($_GET['sort_by'] == 'name_desc') {
+                                                    $query = $query . " ORDER BY barang.nama_barang DESC";
+                                                } elseif ($_GET['sort_by'] == 'created_asc') {
+                                                    $query = $query . " ORDER BY pengeluaran.created_at ASC";
+                                                } else {
+                                                    $query = $query . " ORDER BY pengeluaran.created_at DESC";
+                                                }
+                                            }
 
+                                            $result = mysqli_query($con, $query);
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
 
+                                            ?>
+                                                    <tr>
+                                                        <td><?= $row['nama_barang'] ?></td>
+                                                        <td><?= $row['jumlah'] ?></td>
+                                                        <td><?= $row['created_at'] ?></td>
+                                                        <td>
+                                                            <a data-toggle="modal" data-target="#modal-delete" data-id_pengeluaran="<?= $row['id'] ?>" class="btn btn-sm btn-danger "><i class="fa fa-trash"></i> Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <tr>
+                                                    <td colspan="5" class="text-center"> <span>Data tidak ditemukan</span> </td>
+                                                </tr>
+                                            <?php
+                                            }
+
+                                            ?>
                                         </tbody>
                                     </table>
 
                                 </div>
-                                <!-- pagination number -->
-                                <div class="card-footer clearfix">
-
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                        <?php
-                                        if (!empty($total_pages)) {
-                                            for ($i = 1; $i <= $total_pages; $i++) {
-                                                if ($i == 1) {
-                                        ?>
-                                                    <li class="page-item" id="<?= $i; ?>"><a data-id="<?= $i; ?>" class="page-link"><?= $i; ?></a></li>
-
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <li class="page-item" id="<?= $i; ?>"><a class="page-link" data-id="<?= $i; ?>"><?= $i; ?></a></li>
-                                        <?php
-                                                }
-                                            }
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
+                                
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -141,7 +173,7 @@ include '../layout/head.php';
                                                 if ($barang->num_rows > 0) {
                                                     while ($row = $barang->fetch_assoc()) {
                                                 ?>
-                                                        <option value="<?= $row['id']?>"><?= $row['nama_barang']?></option>
+                                                        <option value="<?= $row['id'] ?>"><?= $row['nama_barang'] ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -316,7 +348,7 @@ include '../layout/head.php';
     </div>
     <!-- ./wrapper -->
     <?php include '../layout/script.php'; ?>
-   
+
 </body>
 
 </html>

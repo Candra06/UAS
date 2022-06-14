@@ -135,7 +135,7 @@ include '../layout/head.php';
               try {
                 move_uploaded_file($tempname, $folder);
                 echo " <script>
-                      alert('Berhasil mengubah data !');
+                      alert('Berhasil menambah data !');
                       window.location = 'http://localhost/UAS';
                       </script>";
                 $url = BASEURL;
