@@ -134,6 +134,7 @@ include '../layout/head.php';
             // if ($q) {
               try {
                 $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+                echo $q;
                 move_uploaded_file($tempname, $folder);
                 echo " <script>
                       alert('Berhasil menambah data !');
