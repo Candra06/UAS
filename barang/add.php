@@ -128,7 +128,7 @@ include '../layout/head.php';
             $filename = getName() . '.' . $ext;
             $tempname = $_FILES["foto"]["tmp_name"];
             // $folder = "../foto/" . $filename;
-            echo $folder;
+            
               try {
                 $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
                 // echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
@@ -143,7 +143,7 @@ include '../layout/head.php';
                       </script>";
                 }             
               } catch (Exception $e) {
-                echo $e->getMessage();
+                $e->getMessage();
               }
           }
           ?>
