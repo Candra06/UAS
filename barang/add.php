@@ -127,11 +127,11 @@ include '../layout/head.php';
             $ext = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
             $filename = getName() . '.' . $ext;
             $tempname = $_FILES["foto"]["tmp_name"];
-            $folder = "../foto/" . $filename;
+            // $folder = "../foto/" . $filename;
             echo $folder;
               try {
                 $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
-                echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
+                // echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
                 if (move_uploaded_file($tempname, $folder)) {
                   echo " <script>
                       alert('Berhasil menambah data !');
@@ -142,8 +142,8 @@ include '../layout/head.php';
                       alert('Gagal menambah data !');
                       </script>";
                 }             
-              } catch (\Throwable $th) {
-                echo $th;
+              } catch (Exception $e) {
+                echo $e->getMessage();
               }
           }
           ?>
