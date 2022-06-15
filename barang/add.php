@@ -129,29 +129,25 @@ include '../layout/head.php';
             $tempname = $_FILES["foto"]["tmp_name"];
             $folder = "../foto/" . $filename;
 
-            try {
-              $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+            $q = mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+            echo "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')";
+            // if ($q) {
+            //   if (move_uploaded_file($tempname, $folder)) {
+            //     echo " <script>
+            //           alert('Berhasil menambah data !');
+            //           window.location = 'http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas_172410103012';
+            //           </script>";
+            //   } else {
 
-              if ($q) {
-                if (move_uploaded_file($tempname, $folder)) {
-                  echo " <script>
-                      alert('Berhasil menambah data !');
-                      window.location = 'http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas_172410103012';
-                      </script>";
-                } else {
-
-                  echo " <script>
-                      alert('Gagal mengunggah foto !');
-                      </script>";
-                }
-              } else {
-                echo " <script>
-                      alert('Gagal menambah data !');
-                      </script>";
-              }
-            } catch (Exception $e) {
-              $e->getMessage();
-            }
+            //     echo " <script>
+            //           alert('Gagal mengunggah foto !');
+            //           </script>";
+            //   }
+            // } else {
+            //   echo " <script>
+            //           alert('Gagal menambah data !');
+            //           </script>";
+            // }
           }
           ?>
         </div>
