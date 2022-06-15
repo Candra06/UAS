@@ -134,7 +134,7 @@ include '../layout/head.php';
             //   die($con->error);
             // }
             try {
-              mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+              mysqli_query($con, "INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama',$stok,'$status','$filename')");
             } catch (Exception $th) {
               echo $th->$e->getMessage();
               die();
