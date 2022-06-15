@@ -129,8 +129,8 @@ include '../layout/head.php';
             $tempname = $_FILES["foto"]["tmp_name"];
             $folder = "../foto/" . $filename;
 
-            // $q = $con->query("INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
-            echo $con->query("INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+            $q = $con->query("INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
+            echo "error".mysqli_error($con);
             // if ($q) {
             //   if (move_uploaded_file($tempname, $folder)) {
             //     echo " <script>
