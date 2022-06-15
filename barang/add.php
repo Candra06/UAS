@@ -131,7 +131,7 @@ include '../layout/head.php';
 
             $q = $con->query("INSERT INTO barang (nama_barang,stok,status,foto) VALUES ('$nama','$stok','$status','$filename')");
             if (!$q) {
-              echo "error".mysqli_error($con);
+              die($con->error);
             }
             // if ($q) {
             //   if (move_uploaded_file($tempname, $folder)) {
