@@ -2,7 +2,7 @@
 // define('BASEURL', "http://" . $_SERVER['SERVER_NAME'] . '/' . basename(__DIR__) . '/');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-define('BASEURL', "http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas_172410103012");
+define('BASEURL', "http://pbw.ilkom.unej.ac.id/ifd/ifd172410103012/uas");
 $host = "localhost";
 $user = "172410103012";
 $password = "secret";
